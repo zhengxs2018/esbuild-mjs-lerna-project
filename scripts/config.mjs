@@ -58,13 +58,13 @@ export async function getMergedConfig(pkg, opts = {}) {
 
   const charset = opts['charset'] || userConfig['charset']
   const outdir = opts['outdir'] || userConfig['outdir'] || 'dist'
-  const minify = opts['minify'] ?? userConfig['minify']
 
   const extraOptions = pick(userConfig, [
     'globalName',
     'entryNames',
     'define',
     'outExtension',
+    'minify'
   ])
 
   const plugins = userConfig['plugins'] || []
@@ -87,7 +87,6 @@ export async function getMergedConfig(pkg, opts = {}) {
     write: true,
     bundle: true,
     watch: mode === 'development' || opts['watch'] || userConfig['watch'],
-    minify: minify || mode === 'production',
     external: userConfig['external'] || getPackagesDeps(pkg),
   }
 

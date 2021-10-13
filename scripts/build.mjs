@@ -17,7 +17,9 @@ const argv = defaults(mri(process.argv.slice(2)), {
   mode: 'development',
 })
 
-const packages = await getLibPackages(resolve(__dirname, '..'))
+const rootPath = resolve(__dirname, '..')
+
+const packages = await getPackages(rootPath, argv._, argv.exclude, argv.showPrivate)
 
 for (const pkg of packages) {
   const { configs } = await getMergedConfig(pkg, argv)
@@ -47,7 +49,7 @@ async function compile(options) {
   }
 }
 
-async function getLibPackages(cwd) {
+async function getPackages(cwd, include, exclude, showPrivate) {
   const packages = await Project.getPackages(cwd)
-  return filterPackages(packages, argv._)
+  return filterPackages(packages, include, exclude, showPrivate)
 }
