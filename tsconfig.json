@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.lib.json",
+  /* Visit https://aka.ms/tsconfig.json to read more about this file */
+  "compilerOptions": {
+    // 提供给根模块使用
+    "module": "CommonJS"
+  },
+  "files": [],
+  "include": [],
+  "exclude": ["node_modules"]
+}
